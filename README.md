@@ -45,25 +45,3 @@ Additionally, sign up for free accounts on these services:
 git clone https://github.com/yourusername/social-media-content-generator.git
 cd social-media-content-generator
 ```
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-apiKey: "AIzaSyAb8aNz9z8oGYUhuyVB9KfaFhdzaiViEKY",
-authDomain: "social-media-content-gen-e83ef.firebaseapp.com",
-projectId: "social-media-content-gen-e83ef",
-storageBucket: "social-media-content-gen-e83ef.appspot.com",
-messagingSenderId: "358667069315",
-appId: "1:358667069315:web:a1e8b65391cde8a684f8b6",
-measurementId: "G-770CH03N7G"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
