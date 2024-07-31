@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { LOCAL_STORAGE_KEYS } from "../../constants/local-storage-keys";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
@@ -11,8 +11,28 @@ export default function AppLayout(props: AppLayoutProps) {
   }
 
   return (
-    <>
+    <div className="flex">
+      <aside className="w-[200px] p-4 bg-gray-100 h-screen">
+        <div className="flex flex-col">
+          <NavLink
+            to="/"
+            className={({ isActive, isPending, isTransitioning }) =>
+              [isActive ? "text-blue-400" : ""].join(" ")
+            }
+          >
+            Services
+          </NavLink>
+          <NavLink
+            to="profile"
+            className={({ isActive, isPending, isTransitioning }) =>
+              [isActive ? "text-blue-400" : ""].join(" ")
+            }
+          >
+            Profile
+          </NavLink>
+        </div>
+      </aside>
       <Outlet />
-    </>
+    </div>
   );
 }

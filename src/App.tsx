@@ -3,6 +3,8 @@ import "./App.css";
 import AuthLayout from "./layouts/auth/auth";
 import AuthLoginPage from "./pages/auth/login/page";
 import AppLayout from "./layouts/app/app";
+import Services from "./pages/services/page";
+import Profile from "./pages/profile/page";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>App Layout</h1>,
+        element: <Services />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
