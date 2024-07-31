@@ -1,3 +1,5 @@
+console.log(process.env);
+
 export const ENVS = {
-  BASE_API_URL: process.env.BASE_API_URL || "",
+  REACT_APP_BASE_API_URL: process.env.REACT_APP_BASE_API_URL || "",
 };
