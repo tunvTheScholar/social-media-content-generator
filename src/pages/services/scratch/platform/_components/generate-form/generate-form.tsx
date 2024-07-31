@@ -21,9 +21,16 @@ import {
 } from "../../../../../../components/ui/select";
 import { serviceScratchPlatformCaptionSoundOptions } from "../../configs";
 import { FormValues, generateFormSchema } from "./generate-form.schema";
+import { generatePostCaptions } from "../../../../../../services/generate/generate-post-captions";
 
-interface GenerateFormProps {}
-export default function GenerateForm(props: GenerateFormProps) {
+interface GenerateFormProps {
+  socialNetwork: string;
+  onSuccess: (captions: string[]) => void;
+}
+export default function GenerateForm({
+  socialNetwork,
+  onSuccess,
+}: GenerateFormProps) {
   const form = useForm<FormValues>({
     defaultValues: {
       caption: "",
@@ -32,12 +39,20 @@ export default function GenerateForm(props: GenerateFormProps) {
     resolver: zodResolver(generateFormSchema),
   });
 
-  const handleGeneratePostCaptions = (data: FormValues) => {};
+  const handleGeneratePostCaptions = (data: FormValues) => {
+    generatePostCaptions({
+      socialNetwork,
+      subject: data.caption,
+      tone: data.captionSound,
+    }).then((res) => {
+      res?.data && onSuccess(res?.data);
+    });
+  };
 
   return (
     <div className="flex flex-col gap-4">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(() => {})}>
+        <form onSubmit={form.handleSubmit(handleGeneratePostCaptions)}>
           <div className="">
             <FormField
               control={form.control}
