@@ -5,6 +5,8 @@ import AuthLoginPage from "./pages/auth/login/page";
 import AppLayout from "./layouts/app/app";
 import Services from "./pages/services/page";
 import Profile from "./pages/profile/page";
+import ServiceScratch from "./pages/services/scratch/page";
+import ScratchPlatform from "./pages/services/scratch/platform/page";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +24,20 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        index: true,
+        path: "services",
         element: <Services />,
       },
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "services/scratch",
+        element: <ServiceScratch />,
+      },
+      {
+        path: "services/scratch/:platformId",
+        element: <ScratchPlatform />,
       },
     ],
   },

@@ -15,7 +15,7 @@ export default function AppLayout(props: AppLayoutProps) {
       <aside className="w-[200px] p-4 bg-gray-100 h-screen">
         <div className="flex flex-col">
           <NavLink
-            to="/"
+            to="/services"
             className={({ isActive, isPending, isTransitioning }) =>
               [isActive ? "text-blue-400" : ""].join(" ")
             }
