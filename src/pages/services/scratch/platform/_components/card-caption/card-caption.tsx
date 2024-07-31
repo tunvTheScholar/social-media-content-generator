@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "../../../../../../components/ui/button";
 import {
   Card,
@@ -13,11 +14,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../../../../../components/ui/dropdown-menu";
+import { saveGeneratedContent } from "../../../../../../services/generate/save-generated-content";
+import { useLocalStorage } from "../../../../../../hooks/useLocalStorage";
+import { LOCAL_STORAGE_KEYS } from "../../../../../../constants/local-storage-keys";
 
 interface CardCaptionProps {
   caption: string;
+  topic: string;
 }
-export default function CardCaption({ caption }: CardCaptionProps) {
+export default function CardCaption({ caption, topic }: CardCaptionProps) {
+  const [captionId, setCaptionId] = useState("");
+  const [phoneNumber] = useLocalStorage(LOCAL_STORAGE_KEYS.PHONE_NUMBER, "");
+
   const { caption: c, title } = JSON.parse(caption) as {
     title: string;
     caption: string;
@@ -29,7 +37,20 @@ export default function CardCaption({ caption }: CardCaptionProps) {
     window.location.href = mailtoLink;
   };
 
-  const handleShareToFacebook = () => {};
+  const handleShareToFacebook = () => {
+    // TODO regist Facebook AppId
+  };
+
+  const handleSaveGeneratedCaption = () => {
+    saveGeneratedContent({
+      caption: c,
+      title,
+      phoneNumber,
+      topic,
+    }).then((res) => {
+      res?.data.captionId && setCaptionId(res?.data.captionId);
+    });
+  };
 
   return (
     <Card>
@@ -49,7 +70,9 @@ export default function CardCaption({ caption }: CardCaptionProps) {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button>Save</Button>
+        <Button onClick={handleSaveGeneratedCaption}>
+          {captionId ? "Saved" : "Save"}
+        </Button>
       </CardFooter>
     </Card>
   );

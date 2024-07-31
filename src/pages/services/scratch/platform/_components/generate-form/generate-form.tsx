@@ -25,7 +25,7 @@ import { generatePostCaptions } from "../../../../../../services/generate/genera
 
 interface GenerateFormProps {
   socialNetwork: string;
-  onSuccess: (captions: string[]) => void;
+  onSuccess: (topic: string, captions: string[]) => void;
 }
 export default function GenerateForm({
   socialNetwork,
@@ -45,7 +45,7 @@ export default function GenerateForm({
       subject: data.caption,
       tone: data.captionSound,
     }).then((res) => {
-      res?.data && onSuccess(res?.data);
+      res?.data && onSuccess(data.caption, res?.data);
     });
   };
 

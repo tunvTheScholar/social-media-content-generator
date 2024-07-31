@@ -12,6 +12,7 @@ export default function ScratchPlatform(props: ScratchPlatformProps) {
 
   const platform = serviceScratchPlatformMap.get(platformId);
   const [captions, setCaptions] = useState<string[]>([]);
+  const [topic, setTopic] = useState<string>("");
 
   if (!platform) {
     window.location.href = "/services/scratch/fb";
@@ -26,7 +27,10 @@ export default function ScratchPlatform(props: ScratchPlatformProps) {
       <p>What topic do you want a caption for?</p>
       <GenerateForm
         socialNetwork={platform.label}
-        onSuccess={(c) => setCaptions(c)}
+        onSuccess={(t, c) => {
+          setCaptions(c);
+          setTopic(t);
+        }}
       />
 
       <Match when={captions.length}>
@@ -35,7 +39,10 @@ export default function ScratchPlatform(props: ScratchPlatformProps) {
         </h3>
 
         <div className="flex flex-col gap-4">
-          <Each of={captions} renderer={(c) => <CardCaption caption={c} />} />
+          <Each
+            of={captions}
+            renderer={(c) => <CardCaption caption={c} topic={topic} />}
+          />
         </div>
       </Match>
     </div>
