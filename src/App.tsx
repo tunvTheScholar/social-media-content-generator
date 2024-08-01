@@ -7,6 +7,7 @@ import Profile from "./pages/profile/page";
 import Services from "./pages/services/page";
 import ServiceScratch from "./pages/services/scratch/page";
 import ScratchPlatform from "./pages/services/scratch/platform/page";
+import ServiceInspiredPage from "./pages/services/inspired/page";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "services/scratch",
         element: <ServiceScratch />,
+      },
+      {
+        path: "services/inspired",
+        element: <ServiceInspiredPage />,
       },
       {
         path: "services/scratch/:platformId",

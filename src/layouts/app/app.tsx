@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { LOCAL_STORAGE_KEYS } from "../../constants/local-storage-keys";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
@@ -32,7 +32,9 @@ export default function AppLayout(props: AppLayoutProps) {
           </NavLink>
         </div>
       </aside>
-      <Outlet />
+      <div className="w-full h-screen overflow-y-scroll">
+        <Outlet />
+      </div>
     </div>
   );
 }
