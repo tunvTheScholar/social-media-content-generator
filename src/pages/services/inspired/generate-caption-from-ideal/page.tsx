@@ -10,6 +10,7 @@ export default function GenerateCaptionFromIdea(
 ) {
   const [searchParams] = useSearchParams();
   const idea = searchParams.get("idea");
+  const topic = searchParams.get("topic");
 
   const [captions, setCaptions] = useState<string[]>([]);
 
@@ -24,13 +25,15 @@ export default function GenerateCaptionFromIdea(
         Your idea
       </h2>
       <GenerateCaptionForm
-        defaultValues={{ idea }}
+        defaultValues={{ idea, topic: topic || "" }}
         onSuccess={(_captions) => setCaptions(_captions)}
       />
-      <div className="flex flex-col mt-4">
+      <div className="flex flex-col mt-4 gap-4">
         <Each
           of={captions}
-          renderer={(_caption) => <CardCaption caption={_caption} topic="" />}
+          renderer={(_caption) => (
+            <CardCaption caption={_caption} topic={topic || ""} />
+          )}
         />
       </div>
     </div>

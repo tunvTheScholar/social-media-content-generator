@@ -13,6 +13,7 @@ import {
   GenerateCaption,
   generateCaptionSchema,
 } from "./generate-caption.schema";
+import { createCaptionsFromIdeas } from "../../../../../../services/generate/create-captions-from-idea";
 
 interface GenerateCaptionFormProps {
   onSuccess?: (captions: string[]) => void;
@@ -22,6 +23,7 @@ export default function GenerateCaptionForm({
   onSuccess,
   defaultValues = {
     idea: "",
+    topic: "",
   },
 }: GenerateCaptionFormProps) {
   const form = useForm<GenerateCaption>({
@@ -29,7 +31,11 @@ export default function GenerateCaptionForm({
     resolver: zodResolver(generateCaptionSchema),
   });
 
-  const handleGenerateCaptionFromIdea = async (data: GenerateCaption) => {};
+  const handleGenerateCaptionFromIdea = async (data: GenerateCaption) => {
+    createCaptionsFromIdeas(data).then((res) => {
+      onSuccess && onSuccess(res.data);
+    });
+  };
 
   return (
     <div>
