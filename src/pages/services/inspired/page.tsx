@@ -6,6 +6,7 @@ import IdeaItem from "./_components/idea-item/idea-item";
 interface ServiceInspiredPageProps {}
 export default function ServiceInspiredPage(props: ServiceInspiredPageProps) {
   const [ideas, setIdeas] = useState<string[]>([]);
+  const [topic, setTopic] = useState("");
 
   return (
     <div className="p-4">
@@ -17,9 +18,17 @@ export default function ServiceInspiredPage(props: ServiceInspiredPageProps) {
         Skipli AI will generate a list of post ides and captions for you.
       </p>
 
-      <InspiredTopicForm onSuccess={(i) => setIdeas(i)} />
+      <InspiredTopicForm
+        onSuccess={(t, i) => {
+          setIdeas(i);
+          setTopic(t);
+        }}
+      />
       <div className="flex flex-col gap-4 mt-4">
-        <Each of={ideas} renderer={(i) => <IdeaItem idea={i} />} />
+        <Each
+          of={ideas}
+          renderer={(i) => <IdeaItem topic={topic} idea={i} />}
+        />
       </div>
     </div>
   );

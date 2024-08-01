@@ -14,7 +14,7 @@ import { Button } from "../../../../../components/ui/button";
 import { getPostIdeas } from "../../../../../services/generate/get-post-ideas";
 
 interface InspiredTopicFormProps {
-  onSuccess: (ideas: string[]) => void;
+  onSuccess: (topic: string, ideas: string[]) => void;
 }
 export default function InspiredTopicForm({
   onSuccess,
@@ -28,7 +28,7 @@ export default function InspiredTopicForm({
 
   const handleGetIdeasFrom = (data: InspiredTopic) => {
     getPostIdeas(data).then((res) => {
-      onSuccess(res.data);
+      onSuccess(data.topic, res.data);
     });
   };
 

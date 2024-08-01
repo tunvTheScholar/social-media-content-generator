@@ -8,6 +8,7 @@ import Services from "./pages/services/page";
 import ServiceScratch from "./pages/services/scratch/page";
 import ScratchPlatform from "./pages/services/scratch/platform/page";
 import ServiceInspiredPage from "./pages/services/inspired/page";
+import GenerateCaptionFromIdea from "./pages/services/inspired/generate-caption-from-ideal/page";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "services/inspired",
         element: <ServiceInspiredPage />,
+      },
+      {
+        path: "services/inspired/generate-caption-from-idea",
+        element: <GenerateCaptionFromIdea />,
       },
       {
         path: "services/scratch/:platformId",
