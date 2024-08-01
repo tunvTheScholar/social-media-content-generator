@@ -58,7 +58,7 @@ export default function LoginForm(props: LoginFormProps) {
     const phoneNumber = form.getValues().phoneNumber;
     validateAccessCode({ ...accessCodeData, phoneNumber }).then((res) => {
       setPhoneNumber(phoneNumber);
-      window.location.href = "/";
+      window.location.href = "/services";
     });
   };
 

@@ -5,5 +5,7 @@ interface EachProps<T> {
   renderer: (props: T, index: number) => React.ReactNode;
 }
 export default function Each<T = any>({ of = [], renderer }: EachProps<T>) {
-  return Children.toArray(of.map((item, index) => renderer(item, index)));
+  return (
+    <>{Children.toArray(of.map((item, index) => renderer(item, index)))}</>
+  );
 }
