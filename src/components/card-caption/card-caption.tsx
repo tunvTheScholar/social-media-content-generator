@@ -18,9 +18,14 @@ import {
 interface CardCaptionProps {
   caption: string;
   topic: string;
+  captionId?: string;
 }
-export default function CardCaption({ caption, topic }: CardCaptionProps) {
-  const [captionId, setCaptionId] = useState("");
+export default function CardCaption({
+  caption,
+  topic,
+  captionId: _captionId = "",
+}: CardCaptionProps) {
+  const [captionId, setCaptionId] = useState(_captionId);
   const [phoneNumber] = useLocalStorage(LOCAL_STORAGE_KEYS.PHONE_NUMBER, "");
 
   const { caption: c, title } = JSON.parse(caption) as {
