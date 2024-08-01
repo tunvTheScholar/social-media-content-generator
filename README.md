@@ -45,3 +45,10 @@ Additionally, sign up for free accounts on these services:
 git clone https://github.com/yourusername/social-media-content-generator.git
 cd social-media-content-generator
 ```
+
+### 2.Clone the server
+
+```bash
+git clone https://github.com/yourusername/social-media-content-generator-server.git
+cd social-media-content-generator-server
+```
