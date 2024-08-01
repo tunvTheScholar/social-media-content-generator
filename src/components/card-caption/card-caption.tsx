@@ -1,22 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../../../../../../components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "../../../../../../components/ui/card";
+import { LOCAL_STORAGE_KEYS } from "../../constants/local-storage-keys";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { saveGeneratedContent } from "../../services/generate/save-generated-content";
+import { unsavedGeneratedContent } from "../../services/generate/unsave-generated-content";
+import Match from "../match";
+import { Button } from "../ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../../../../../../components/ui/dropdown-menu";
-import { saveGeneratedContent } from "../../../../../../services/generate/save-generated-content";
-import { useLocalStorage } from "../../../../../../hooks/useLocalStorage";
-import { LOCAL_STORAGE_KEYS } from "../../../../../../constants/local-storage-keys";
+} from "../ui/dropdown-menu";
 
 interface CardCaptionProps {
   caption: string;
@@ -52,6 +49,15 @@ export default function CardCaption({ caption, topic }: CardCaptionProps) {
     });
   };
 
+  const handleUnSaveGeneratedCaption = () => {
+    const data = {
+      captionId,
+      phoneNumber,
+    };
+
+    unsavedGeneratedContent(data).then(() => setCaptionId(""));
+  };
+
   return (
     <Card>
       <CardHeader>{title}</CardHeader>
@@ -70,9 +76,14 @@ export default function CardCaption({ caption, topic }: CardCaptionProps) {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button onClick={handleSaveGeneratedCaption}>
-          {captionId ? "Saved" : "Save"}
-        </Button>
+        <Match when={captionId}>
+          <Button variant="destructive" onClick={handleUnSaveGeneratedCaption}>
+            Unsaved
+          </Button>
+        </Match>
+        <Match when={!captionId}>
+          <Button onClick={handleSaveGeneratedCaption}>Save</Button>
+        </Match>
       </CardFooter>
     </Card>
   );

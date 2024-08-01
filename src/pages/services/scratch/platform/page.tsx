@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import CardCaption from "../../../../components/card-caption";
 import Each from "../../../../components/each";
 import Match from "../../../../components/match";
 import GenerateForm from "./_components/generate-form";
 import { serviceScratchPlatformMap } from "./configs";
-import CardCaption from "./_components/card-caption";
 
 interface ScratchPlatformProps {}
 export default function ScratchPlatform(props: ScratchPlatformProps) {
